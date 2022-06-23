@@ -43,8 +43,3 @@ REACT_APP_OAUTH_GITHUB_CLIENT_SECRET=
 
 > npm install
 > npm run dev
-
-## 주의사항
-
-`fe/.eslintrc.json`에서 `parserOptions: {"project": "./tsconfig.json"}`문제로 fe같은 경우
-fe 디렉토리에서 vsc를 열어야 lint에러가 발생하지 않음
