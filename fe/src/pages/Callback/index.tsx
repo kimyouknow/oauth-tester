@@ -12,7 +12,7 @@ export default function OAuthCallback() {
     const code = searchParams.get(CODE);
     try {
       if (!code) return;
-      const response = await authApi.requestGithubOAuthVersion2(code);
+      const response = await authApi.requestGithubOAuthWithCallbackUrl(code);
       console.log('response :>> ', response);
     } catch (error) {
       console.error(error);

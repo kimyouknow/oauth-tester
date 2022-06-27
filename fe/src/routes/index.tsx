@@ -7,8 +7,8 @@ import {
   OAUTH_VERSION_SERVER,
 } from '@/constant/route';
 import Layout from '@/layout';
+import Callback from '@/pages/Callback';
 import Main from '@/pages/Main';
-import OAuthCallback from '@/pages/OAuthCallback';
 import OAuthWithCallback from '@/pages/OAuthWithCallback';
 import OAuthWithServer from '@/pages/OAuthWithServer';
 
@@ -21,7 +21,7 @@ export default function Router() {
           <Route path={OAUTH_VERSION_SERVER} element={<OAuthWithServer />} />
           <Route path={OAUTH_VERSION_CALLBACK} element={<OAuthWithCallback />} />
         </Route>
-        <Route path={CALLBACK} element={<OAuthCallback />} />
+        <Route path={CALLBACK} element={<Callback />} />
       </Routes>
     </BrowserRouter>
   );
