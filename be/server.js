@@ -19,9 +19,19 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.get('/redirect-tester', (req, res) => {
+  console.log('1');
+  // res.redirect('http://localhost:3000/');
+  res.send('1');
+  // res.json({ a: 1 });
+});
+
+// http://localhost:8081/api/oauth/github
 app.get('/api/oauth/github', (req, res) => {
+  // res.redirect('/redirect-tester');
   // res.redirect(`https://github.com/login/oauth/authorize?client_id=${clientId}`);
-  res.status(302).location(`https://github.com/login/oauth/authorize?client_id=${clientId}`).end();
+  // res.status(302).location(`https://github.com/login/oauth/authorize?client_id=${clientId}`).end();
+  res.json({ url: `https://github.com/login/oauth/authorize?client_id=${clientId}` });
 });
 
 let token = null;
@@ -32,7 +42,6 @@ app.get('/api/auth/github', (req, res) => {
     code: req.query.code,
   };
   const opts = { headers: { accept: 'application/json' } };
-  console.log('body', body);
   axios
     .post(`https://github.com/login/oauth/access_token`, body, opts)
     .then((res) => res.data['access_token'])

@@ -1,15 +1,12 @@
 import Button from '@mui/material/Button';
 
-import { OAUTH_GITHUB_CLIENT_ID } from '@/constant/env';
+import { API_PREFIX, AUTH_API, BASE_API_URL } from '@/constant/api';
 
 export default function OAuthWithClient() {
   return (
     <div>
-      <Button
-        variant="contained"
-        href={`https://github.com/login/oauth/authorize?client_id=${OAUTH_GITHUB_CLIENT_ID}`}
-      >
-        클라이언트에서 callback하는 Github OAuth
+      <Button variant="contained" href={BASE_API_URL + API_PREFIX + AUTH_API.GITHUB_OAUTH}>
+        Github OAuth - href
       </Button>
     </div>
   );
