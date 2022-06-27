@@ -4,11 +4,11 @@ import axios from 'axios';
 
 const app = express();
 
-const clientId = process.env.OAUTH_GITHUB_CLIENT_ID;
-const clientSecret = process.env.OAUTH_GITHUB_CLIENT_ID;
-const redirect_uri = 'api/auth/github';
+const clientId = process.env.OAUTH_GITHUB_CLIENT_ID_REDIRECT;
+const clientSecret = process.env.OAUTH_GITHUB_CLIENT_SECRET_REDIRECT;
 
-const whitelist = ['http://localhost:3000'];
+const cliendIdWithCallback = process.env.OAUTH_GITHUB_CLIENT_ID_CALLBACK;
+const cliendSecretWithCallback = process.env.OAUTH_GITHUB_CLIENT_SECRET_CALLBACK;
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -19,12 +19,11 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// http://localhost:8081/api/oauth/github
 app.get('/api/oauth/github', (req, res) => {
-  // res.redirect(`https://github.com/login/oauth/authorize?client_id=${clientId}`);
-  res.status(302).location(`https://github.com/login/oauth/authorize?client_id=${clientId}`).end();
+  res.json({ url: `https://github.com/login/oauth/authorize?client_id=${clientId}` });
 });
 
-let token = null;
 app.get('/api/auth/github', (req, res) => {
   const body = {
     client_id: clientId,
@@ -32,14 +31,29 @@ app.get('/api/auth/github', (req, res) => {
     code: req.query.code,
   };
   const opts = { headers: { accept: 'application/json' } };
-  console.log('body', body);
   axios
     .post(`https://github.com/login/oauth/access_token`, body, opts)
     .then((res) => res.data['access_token'])
-    .then((_token) => {
+    .then((token) => {
       console.log('My token:', token);
-      token = _token;
       res.redirect('http://localhost:3000/');
+    })
+    .catch((err) => res.status(500).json({ message: err.message }));
+});
+
+app.post('/api/oauth/github/callback', (req, res) => {
+  const body = {
+    client_id: cliendIdWithCallback,
+    client_secret: cliendSecretWithCallback,
+    code: req.body.code,
+  };
+  const opts = { headers: { accept: 'application/json' } };
+  axios
+    .post(`https://github.com/login/oauth/access_token`, body, opts)
+    .then((res) => res.data['access_token'])
+    .then((token) => {
+      console.log('My token:', token);
+      res.json({ token });
     })
     .catch((err) => res.status(500).json({ message: err.message }));
 });

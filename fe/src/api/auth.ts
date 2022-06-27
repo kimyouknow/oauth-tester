@@ -6,8 +6,14 @@ const authApi = {
     return instance({
       url: AUTH_API.GITHUB_OAUTH,
       method: 'get',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
+    });
+  },
+  requestGithubOAuthWithCallbackUrl(code: string) {
+    return instance({
+      url: AUTH_API.GITHUB_OAUTH_CALLBACK,
+      method: 'post',
+      data: {
+        code,
       },
     });
   },

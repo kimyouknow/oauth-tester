@@ -1,9 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { HOME_ROUTE, OAUTH_VERSION_CLIENT, OAUTH_VERSION_SERVER } from '@/constant/route';
+import {
+  CALLBACK,
+  HOME_ROUTE,
+  OAUTH_VERSION_CALLBACK,
+  OAUTH_VERSION_SERVER,
+} from '@/constant/route';
 import Layout from '@/layout';
+import Callback from '@/pages/Callback';
 import Main from '@/pages/Main';
-import OAuthWithClient from '@/pages/OAuthWithClient';
+import OAuthWithCallback from '@/pages/OAuthWithCallback';
 import OAuthWithServer from '@/pages/OAuthWithServer';
 
 export default function Router() {
@@ -13,8 +19,9 @@ export default function Router() {
         <Route path={HOME_ROUTE} element={<Layout />}>
           <Route index element={<Main />} />
           <Route path={OAUTH_VERSION_SERVER} element={<OAuthWithServer />} />
-          <Route path={OAUTH_VERSION_CLIENT} element={<OAuthWithClient />} />
+          <Route path={OAUTH_VERSION_CALLBACK} element={<OAuthWithCallback />} />
         </Route>
+        <Route path={CALLBACK} element={<Callback />} />
       </Routes>
     </BrowserRouter>
   );

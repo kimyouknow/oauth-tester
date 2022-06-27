@@ -1,6 +1,7 @@
 export const HOME_ROUTE = '/';
 export const OAUTH_VERSION_SERVER = '/oauth-version-server';
-export const OAUTH_VERSION_CLIENT = '/oauth-version-client';
+export const OAUTH_VERSION_CALLBACK = '/oauth-version-callback';
+export const CALLBACK = '/callback';
 export const GNB_LINKS = [
   {
     label: 'Main',
@@ -11,7 +12,7 @@ export const GNB_LINKS = [
     url: OAUTH_VERSION_SERVER,
   },
   {
-    label: 'OAUTH with client',
-    url: OAUTH_VERSION_CLIENT,
+    label: 'OAUTH with Callback',
+    url: OAUTH_VERSION_CALLBACK,
   },
 ];
