@@ -4,9 +4,12 @@ import axios from 'axios';
 
 const app = express();
 
-const clientId = process.env.OAUTH_GITHUB_CLIENT_ID;
-const clientSecret = process.env.OAUTH_GITHUB_CLIENT_ID;
+const clientId = process.env.OAUTH_GITHUB_CLIENT_ID_VERSION1;
+const clientSecret = process.env.OAUTH_GITHUB_CLIENT_SECRET_VERSION1;
 const redirect_uri = 'api/auth/github';
+
+const cliendIdWithCallback = process.env.OAUTH_GITHUB_CLIENT_ID_VERSION2;
+const cliendSecretWithCallback = process.env.OAUTH_GITHUB_CLIENT_SECRET_VERSION2;
 
 const whitelist = ['http://localhost:3000'];
 
@@ -19,22 +22,11 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get('/redirect-tester', (req, res) => {
-  console.log('1');
-  // res.redirect('http://localhost:3000/');
-  res.send('1');
-  // res.json({ a: 1 });
-});
-
 // http://localhost:8081/api/oauth/github
 app.get('/api/oauth/github', (req, res) => {
-  // res.redirect('/redirect-tester');
-  // res.redirect(`https://github.com/login/oauth/authorize?client_id=${clientId}`);
-  // res.status(302).location(`https://github.com/login/oauth/authorize?client_id=${clientId}`).end();
   res.json({ url: `https://github.com/login/oauth/authorize?client_id=${clientId}` });
 });
 
-let token = null;
 app.get('/api/auth/github', (req, res) => {
   const body = {
     client_id: clientId,
@@ -45,10 +37,26 @@ app.get('/api/auth/github', (req, res) => {
   axios
     .post(`https://github.com/login/oauth/access_token`, body, opts)
     .then((res) => res.data['access_token'])
-    .then((_token) => {
+    .then((token) => {
       console.log('My token:', token);
-      token = _token;
-      res.redirect('http://localhost:3000/');
+      res.json({ token });
+    })
+    .catch((err) => res.status(500).json({ message: err.message }));
+});
+
+app.post('/api/auth/github/version2', (req, res) => {
+  const body = {
+    client_id: cliendIdWithCallback,
+    client_secret: cliendSecretWithCallback,
+    code: req.body.code,
+  };
+  const opts = { headers: { accept: 'application/json' } };
+  axios
+    .post(`https://github.com/login/oauth/access_token`, body, opts)
+    .then((res) => res.data['access_token'])
+    .then((token) => {
+      console.log('My token:', token);
+      res.json({ token });
     })
     .catch((err) => res.status(500).json({ message: err.message }));
 });
