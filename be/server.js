@@ -39,12 +39,12 @@ app.get('/api/auth/github', (req, res) => {
     .then((res) => res.data['access_token'])
     .then((token) => {
       console.log('My token:', token);
-      res.json({ token });
+      res.redirect('http://localhost:3000/');
     })
     .catch((err) => res.status(500).json({ message: err.message }));
 });
 
-app.post('/api/auth/github/version2', (req, res) => {
+app.post('/api/oauth/github/callback', (req, res) => {
   const body = {
     client_id: cliendIdWithCallback,
     client_secret: cliendSecretWithCallback,
