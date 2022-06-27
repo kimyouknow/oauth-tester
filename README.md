@@ -10,7 +10,11 @@
 
 `callback페이지를 활용한 OAuth흐름`과 `서버에서 모든 처리를 하는 OAuth흐름`을 나누어 구현해봤습니다.
 
+어떤 방법이든 Loading 중인 UI가 사용자에게 보여야한다고 생각합니다. 이런 의미에서 현재 구현한 두 가지 방법 중 `callback페이지를 활용한 OAuth흐름`가 `loading UI`를 보여줄 수 있어 `프론트와 백앤드 사이에 요청이 많아 번거롭지만` 사용자 관점에서 좋다고 느껴졌습니다.
+
 ## callback페이지를 활용한 OAuth흐름
+
+![callback](https://user-images.githubusercontent.com/71386219/175968304-95227e32-65d3-427c-9e6f-ab3192612d60.gif)
 
 Github 로그인 버튼 클릭
 
@@ -35,6 +39,8 @@ code를 받아서 서버로 요청(/api/oauth/github/callback)
 token 저장 관련 학습 중 ....
 
 ## 서버에서 모든 처리를 하는 OAuth흐름
+
+![server](https://user-images.githubusercontent.com/71386219/175968278-fc4b4c3a-2162-4dad-8096-e4f5e2695fde.gif)
 
 Github 로그인 버튼 클릭
 
