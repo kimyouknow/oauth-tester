@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import authApi from '@/api/auth';
+import { HOME_ROUTE } from '@/constant/route';
 
 const CODE = 'code';
 
 export default function OAuthCallback() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const getToken = async () => {
@@ -13,7 +15,9 @@ export default function OAuthCallback() {
     try {
       if (!code) return;
       const response = await authApi.requestGithubOAuthWithCallbackUrl(code);
-      console.log('response :>> ', response);
+      if (response.data.token) {
+        navigate(HOME_ROUTE);
+      }
     } catch (error) {
       console.error(error);
     }
