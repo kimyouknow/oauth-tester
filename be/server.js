@@ -4,14 +4,11 @@ import axios from 'axios';
 
 const app = express();
 
-const clientId = process.env.OAUTH_GITHUB_CLIENT_ID_VERSION1;
-const clientSecret = process.env.OAUTH_GITHUB_CLIENT_SECRET_VERSION1;
-const redirect_uri = 'api/auth/github';
+const clientId = process.env.OAUTH_GITHUB_CLIENT_ID_REDIRECT;
+const clientSecret = process.env.OAUTH_GITHUB_CLIENT_SECRET_REDIRECT;
 
-const cliendIdWithCallback = process.env.OAUTH_GITHUB_CLIENT_ID_VERSION2;
-const cliendSecretWithCallback = process.env.OAUTH_GITHUB_CLIENT_SECRET_VERSION2;
-
-const whitelist = ['http://localhost:3000'];
+const cliendIdWithCallback = process.env.OAUTH_GITHUB_CLIENT_ID_CALLBACK;
+const cliendSecretWithCallback = process.env.OAUTH_GITHUB_CLIENT_SECRET_CALLBACK;
 
 const corsOptions = {
   origin: 'http://localhost:3000',

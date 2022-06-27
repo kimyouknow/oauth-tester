@@ -17,7 +17,7 @@ export default function OAauthWithServer() {
   return (
     <div>
       <Button variant="contained" onClick={handleGithubOauthClick}>
-        Github OAuth - axios
+        Github OAuth - server redirect
       </Button>
     </div>
   );
