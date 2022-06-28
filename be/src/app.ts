@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import axios from 'axios';
@@ -58,4 +59,7 @@ app.post('/api/oauth/github/callback', (req, res) => {
     .catch((err) => res.status(500).json({ message: err.message }));
 });
 
-export default app;
+const PORT = process.env.PORT;
+const handleListenning = () => console.log(`✅ Listening on: http://localhost:${PORT}`);
+
+app.listen(PORT, handleListenning);
