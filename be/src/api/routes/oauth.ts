@@ -10,13 +10,13 @@ const cliendSecretWithCallback = process.env.OAUTH_GITHUB_CLIENT_SECRET_CALLBACK
 const route = Router();
 
 export default (app: Router) => {
-  // app.use('/oauth', route);
+  app.use('/oauth', route);
 
-  route.get('/oauth/github', (req, res) => {
+  route.get('/github', (req, res) => {
     res.json({ url: `https://github.com/login/oauth/authorize?client_id=${clientId}` });
   });
 
-  route.get('/auth/github', (req, res) => {
+  route.get('/github', (req, res) => {
     const body = {
       client_id: clientId,
       client_secret: clientSecret,
@@ -33,7 +33,7 @@ export default (app: Router) => {
       .catch((err) => res.status(500).json({ message: err.message }));
   });
 
-  route.post('/oauth/github/callback', (req, res) => {
+  route.post('/github/callback', (req, res) => {
     const body = {
       client_id: cliendIdWithCallback,
       client_secret: cliendSecretWithCallback,

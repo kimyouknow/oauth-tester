@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import 'dotenv/config';
 import express from 'express';
+import config from './config';
 import loaders from './loaders';
 
-const PORT = process.env.PORT;
+const PORT = config.SERVER_PORT;
 
 async function startServer() {
   const app = express();
@@ -12,11 +12,7 @@ async function startServer() {
 
   app
     .listen(PORT, () => {
-      console.log(`
-      ################################################
-      🛡️  Server listening on port: ${PORT} 🛡️
-      ################################################
-    `);
+      console.log(`✅  Server listening on port: ${PORT}`);
     })
     .on('error', (err) => {
       console.error(err);
