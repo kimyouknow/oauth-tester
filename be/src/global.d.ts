@@ -4,6 +4,10 @@ declare global {
       NODE_ENV: 'development' | 'production';
       PORT: string;
       MONGO_PATH: string;
+      OAUTH_GITHUB_CLIENT_ID_REDIRECT: string;
+      OAUTH_GITHUB_CLIENT_SECRET_REDIRECT: string;
+      OAUTH_GITHUB_CLIENT_ID_CALLBACK: string;
+      OAUTH_GITHUB_CLIENT_SECRET_CALLBACK: string;
     }
   }
 }

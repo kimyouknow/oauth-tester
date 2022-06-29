@@ -15,4 +15,16 @@ export default {
   API: {
     PREFIX: '/api',
   },
+  OAUTH: {
+    GITHUB: {
+      REDIRECT: {
+        CLIENT_ID: process.env.OAUTH_GITHUB_CLIENT_ID_REDIRECT,
+        SECRET_ID: process.env.OAUTH_GITHUB_CLIENT_SECRET_REDIRECT,
+      },
+      CALLBACK: {
+        CLIENT_ID: process.env.OAUTH_GITHUB_CLIENT_ID_CALLBACK,
+        SECRET_ID: process.env.OAUTH_GITHUB_CLIENT_SECRET_CALLBACK,
+      },
+    },
+  },
 };

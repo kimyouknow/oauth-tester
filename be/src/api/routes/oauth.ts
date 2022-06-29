@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { Router, Request, Response, NextFunction } from 'express';
+import config from '../../config';
 
-const clientId = process.env.OAUTH_GITHUB_CLIENT_ID_REDIRECT;
-const clientSecret = process.env.OAUTH_GITHUB_CLIENT_SECRET_REDIRECT;
-
-const cliendIdWithCallback = process.env.OAUTH_GITHUB_CLIENT_ID_CALLBACK;
-const cliendSecretWithCallback = process.env.OAUTH_GITHUB_CLIENT_SECRET_CALLBACK;
+const {
+  GITHUB: {
+    REDIRECT: { CLIENT_ID: clientId, SECRET_ID: clientSecret },
+    CALLBACK: { CLIENT_ID: cliendIdWithCallback, SECRET_ID: cliendSecretWithCallback },
+  },
+} = config.OAUTH;
 
 const route = Router();
 
