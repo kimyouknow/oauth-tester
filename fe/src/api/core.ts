@@ -6,6 +6,7 @@ const instance: AxiosInstance = axios.create({
   baseURL: BASE_API_URL + API_PREFIX,
   timeout: 2500,
   headers: {},
+  withCredentials: true,
 });
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

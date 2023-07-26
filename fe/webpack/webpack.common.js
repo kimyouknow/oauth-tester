@@ -1,8 +1,8 @@
 const path = require('path');
 
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const dotenv = require('dotenv');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 // const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 

@@ -29,7 +29,7 @@ export default (app: Router) => {
       .post(`https://github.com/login/oauth/access_token`, body, opts)
       .then((res) => res.data['access_token'])
       .then((token) => {
-        console.log('My token:', token);
+        console.log('My token server:', token);
         res.cookie('token-redirect', token, { httpOnly: true });
         res.redirect('http://localhost:3000/');
       })
@@ -42,11 +42,13 @@ export default (app: Router) => {
       client_secret: cliendSecretWithCallback,
       code: req.body.code,
     };
-    const opts = { headers: { accept: 'application/json' } };
+    const opts = {
+      headers: { accept: 'application/json' },
+    };
     try {
       const response = await axios.post(`https://github.com/login/oauth/access_token`, body, opts);
       const token = response.data['access_token'];
-      console.log('My token:', token);
+      console.log('My token callback:', token);
       res.cookie('token-callback', token, { httpOnly: true });
       res.json({ token });
     } catch (error) {
